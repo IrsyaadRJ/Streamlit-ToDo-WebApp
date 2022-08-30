@@ -25,4 +25,48 @@ def create_all_tables(Base,engine):
   """
 def delete_table(table,engine):
   table.__table__.drop(engine,checkfirst = True)
+  
+  """
+    Check if the user is already registered.
+    @return True if the user is already registered, False otherwise.
+  """
+def user_exists(username):
+  local_session = Session()  # make a connection to the engine using session maker
+  user_object = local_session.query(User).filter_by(username=username).first()
+  if user_object is None:
+    return False
+  return True
+
+  """
+    Check if the email address is already registered.
+    @return True if the email address is already registered, False otherwise.
+  """
+def email_exists(email):
+  local_session = Session()  # make a connection to the engine using session maker
+  email_object = local_session.query(User).filter_by(email=email).first()
+  if email_object is None:
+    return False
+  return True
+
+"""
+    Check if the username and password are correct.
+    @return True if username and password are correct. False otherwise.
+  """
+def login(username, password):
+  local_session = Session()  # make a connection to the engine using session maker
+  user_object = local_session.query(User).filter_by(
+    username=username, password=password).first()
+  if user_object is None:
+    return False
+  return True
+
+  """
+    Add the user details to the database.
+  """
+def add_user(name,username,password,email):
+  local_session = Session() # make a connection to the engine using session maker
+  new_user = User(name = name, username = username, 
+                  password = password, email = email)
+  local_session.add(new_user) # add the user to the session
+  local_session.commit() # commit the session
 
