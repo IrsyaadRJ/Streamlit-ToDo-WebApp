@@ -1,0 +1,2 @@
+# COSC349-AS1
+COSC349 Assignment 1.
