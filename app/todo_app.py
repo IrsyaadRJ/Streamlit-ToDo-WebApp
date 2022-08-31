@@ -31,7 +31,8 @@ def horizontal():
 
 #  A function that displays the menu functionality,
 #   when the user clicks one of hte menu buttons.
-def menu_func(option_menu):
+def menu_func(option_menu,name_of_user):
+  st.title(f"Welcome {name_of_user} !!")
   if option_menu == "Create":
     st.title(f"You have selected {option_menu}")
   if option_menu == "Read":

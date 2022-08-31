@@ -69,4 +69,11 @@ def add_user(name,username,password,email):
                   password = password, email = email)
   local_session.add(new_user) # add the user to the session
   local_session.commit() # commit the session
-
+  """
+    Get the name of the user.
+  """
+def get_name(username):
+  local_session = Session() # make a connection to the engine using session maker
+  records = local_session.query(User.name).filter_by(username=username)
+  for record in records:
+    return record.name

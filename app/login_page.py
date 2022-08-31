@@ -4,7 +4,8 @@ from db_mysql_func import (
   add_user,
   user_exists,
   email_exists,
-  login
+  login,
+  get_name
 )
 
 # Set the logged in state to false, 
@@ -22,7 +23,7 @@ def Signup_Clicked():
 # The user will be directed to the login page.
 def back_from_signup():
   st.session_state['signUp'] = False
-
+  
 # Show the logout button to logout from the web app.
 def show_logout_button(login_section,logout_section):
   login_section.empty()
@@ -39,11 +40,12 @@ def show_logout_button(login_section,logout_section):
 def LoggedIn_Clicked(userName, password):
     if login(userName, password):
         st.session_state['loggedIn'] = True
+        st.session_state['name'] = get_name(userName)
     else:
       st.session_state['loggedIn'] = False;
       st.error("Invalid user name or password")
 
-# Sign up form 
+# ---- Sign up form ----
 # The following input fields are going to be checked for validity/duplicated.
 # new_name: The fullname of the user 
 #   (Cannot be empty,must be alphabetical and cannot be less than 5 characters).
@@ -120,14 +122,17 @@ def main_login_page():
   with header_section:
     st.title("ToDo Application")
     #first run will have nothing in session_state
+    if 'name' not in st.session_state:
+      st.session_state['name'] = ''
     if 'loggedIn' not in st.session_state and 'signUp' not in st.session_state:
       st.session_state['loggedIn'] = False
       st.session_state['signUp'] = False
       show_login_page(login_section) 
     else:
       if st.session_state['loggedIn']:
+        name_of_user = st.session_state['name']
         show_logout_button(login_section,logout_section)    
-        menu_func(horizontal())
+        menu_func(horizontal(),name_of_user)
       else:
         if st.session_state['signUp']:
           show_signup_page(signup_section)
