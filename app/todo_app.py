@@ -31,19 +31,19 @@ def horizontal():
 
 #  A function that displays the menu functionality,
 #   when the user clicks one of hte menu buttons.
-def menu_func(selected):
-  if selected == "Create":
-    st.title(f"You have selected {selected}")
-  if selected == "Read":
-    st.title(f"You have selected {selected}")
-  if selected == "Update":
-    st.title(f"You have selected {selected}")
-  if selected == "Delete":
-    st.title(f"You have selected {selected}")
-  if selected == "About":
-    st.title(f"You have selected {selected}")
+def menu_func(option_menu):
+  if option_menu == "Create":
+    st.title(f"You have selected {option_menu}")
+  if option_menu == "Read":
+    st.title(f"You have selected {option_menu}")
+  if option_menu == "Update":
+    st.title(f"You have selected {option_menu}")
+  if option_menu == "Delete":
+    st.title(f"You have selected {option_menu}")
+  if option_menu == "About":
+    st.title(f"You have selected {option_menu}")
 
 
-if __name__ == "__main__":
-  menu_func(horizontal())
+# if __name__ == "__main__":
+#   menu_func(horizontal())
   
