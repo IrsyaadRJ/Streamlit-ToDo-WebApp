@@ -69,6 +69,15 @@ def add_user(name,username,password,email):
                   password = password, email = email)
   local_session.add(new_user) # add the user to the session
   local_session.commit() # commit the session
+  
+  """
+    Get the user object based on its username.
+  """
+def get_userObj(username):
+  local_session = Session() 
+  user_obj = local_session.query(User).filter_by(username=username)
+  return user_obj
+  
   """
     Get the name of the user.
   """
