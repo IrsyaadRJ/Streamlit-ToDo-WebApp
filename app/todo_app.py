@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-
+from db_mysql_func import (get_name)
 
 # ToDO Application with CRUD functionality.
 # Stored/retrieved the data inside the mysql.
@@ -31,7 +31,8 @@ def horizontal():
 
 #  A function that displays the menu functionality,
 #   when the user clicks one of hte menu buttons.
-def menu_func(option_menu,name_of_user):
+def menu_func(option_menu,user_obj):
+  name_of_user = get_name(user_obj)
   st.title(f"Welcome {name_of_user} !!")
   if option_menu == "Create":
     st.title(f"You have selected {option_menu}")

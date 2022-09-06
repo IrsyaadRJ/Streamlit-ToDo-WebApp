@@ -40,7 +40,7 @@ def show_logout_button(login_section,logout_section):
 def LoggedIn_Clicked(userName, password):
     if login(userName, password):
         st.session_state['loggedIn'] = True
-        st.session_state['name'] = get_name(userName)
+        st.session_state['user_obj'] = get_userObj(userName)
     else:
       st.session_state['loggedIn'] = False;
       st.error("Invalid user name or password")
@@ -130,17 +130,17 @@ def main_login_page():
   with header_section:
     st.title("ToDo Application")
     #first run will have nothing in session_state
-    if 'name' not in st.session_state:
-      st.session_state['name'] = ''
+    if 'user_obj' not in st.session_state:
+      st.session_state['user_obj'] = None
     if 'loggedIn' not in st.session_state and 'signUp' not in st.session_state:
       st.session_state['loggedIn'] = False
       st.session_state['signUp'] = False
       show_login_page(login_section) 
     else:
       if st.session_state['loggedIn']:
-        name_of_user = st.session_state['name']
+        user_obj = st.session_state['user_obj']
         show_logout_button(login_section,logout_section)    
-        menu_func(horizontal(),name_of_user)
+        menu_func(horizontal(),user_obj)
       else:
         if st.session_state['signUp']:
           show_signup_page(signup_section)
