@@ -67,29 +67,37 @@ def signup_form():
   signup = st.form_submit_button(label='Sign Up')
   
   if signup:
+    is_error = False
     if '' in [new_name,new_username, new_user_email, new_user_pas]:
       st.error('Some fields are missing')
+      is_error = True
     else:
       if len(new_name) < 5 or not new_name.isalpha():
         st.error("Please Enter your valid name !!")
-      if len(new_username) < 5:
+        is_error = True
+      elif len(new_username) < 5:
         st.error('Username must be at least 5 characters long')
-      if len(new_user_email) < 5:
+        is_error = True
+      elif len(new_user_email) < 5:
         st.error('Email must be at least 5 characters long')
-      if len(new_user_pas) < 5:
-        st.error('Password must be at least 5 characters long')
-      if user_exists(new_username):
+        is_error = True
+      elif user_exists(new_username):
         st.error('Username already exists')
-      if email_exists(new_user_email):
+        is_error = True
+      elif email_exists(new_user_email):
         st.error('Email is already registered')
-      else:
-        if new_user_pas != user_pas_conf:
-          st.error('Passwords do not match')
-        else:
-          add_user(new_name,new_username,new_user_email,new_user_pas)
-          st.success('You have successfully registered!')
-          st.success("Please go back and logged in to your account!")
-          del new_user_pas, user_pas_conf
+        is_error = True
+      elif len(new_user_pas) < 5:
+        st.error('Password must be at least 5 characters long')
+        is_error = True
+      elif new_user_pas != user_pas_conf:
+        st.error('Passwords do not match')
+        is_error = True
+    if not is_error:
+      add_user(new_name,new_username,new_user_pas,new_user_email)
+      st.success('You have successfully registered!')
+      st.success("Please go back and logged in to your account!")
+      del new_user_pas, user_pas_conf 
 
 # The login page layout
 def show_login_page(login_section):
