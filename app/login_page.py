@@ -5,7 +5,8 @@ from db_mysql_func import (
   user_exists,
   email_exists,
   login,
-  get_name
+  get_name,
+  get_userObj
 )
 
 # Set the logged in state to false, 
