@@ -1,0 +1,14 @@
+#!/bin/bash
+session="start-streamlit"
+
+# Create a new session named "start-streamlit"
+tmux new-session -d -s "$session"
+# Tmux will ensure that the app will be running in the background.
+# Run streamlit app on its webserver on port 8082 
+tmux send-keys -t "$session" "streamlit run /vagrant/streamlit/simple-sidebar.py --server.port=8082" Enter
+
+# Attach to session
+# tmux attach -t "$session"
+
+# Kill session
+# tmux kill-session -t "$session"
