@@ -1,3 +1,4 @@
+import pandas as pd
 from sqlalchemy import inspect
 from db_mysql_init import Session, Tasktable, User
 
@@ -105,3 +106,32 @@ def get_author(username):
   local_session = Session() 
   user_obj = local_session.query(User).filter_by(username=username).first()
   return user_obj
+
+"""
+  Read the entire table and transform it into a data frame
+  @return dataframe
+"""
+def read_entire_table(table,engine):
+  df = pd.read_sql(f'SELECT * FROM {table.__tablename__}', engine) 
+  return df 
+
+"""
+  Read the entire table and transform it into a data frame.
+  Based on the user's id.
+  @return dataframe
+"""
+def read_user_tasks(user_id, table, engine):
+  df = pd.read_sql(f'''SELECT * FROM {table.__tablename__} 
+                   WHERE user_id = {user_id}''', engine)
+  return df 
+
+"""
+  Add the task and its author to the database.
+"""
+def add_task(task, task_status,task_due_date,username):
+  local_session = Session() # make a connection to the engine using session maker
+  author = local_session.query(User).filter_by(username=username).first()
+  new_task = Tasktable(task = task, task_status = task_status,
+                       task_due_date = task_due_date, author = author)
+  local_session.add(new_task) # add the task to the session
+  local_session.commit() # commit the session
