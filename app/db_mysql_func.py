@@ -81,8 +81,27 @@ def get_userObj(username):
   """
     Get the name of the user.
   """
-def get_name(username):
-  local_session = Session() # make a connection to the engine using session maker
-  records = local_session.query(User.name).filter_by(username=username)
-  for record in records:
+def get_name(user_obj):
+  for record in user_obj:
     return record.name
+
+  """
+    Get the user's id based on its object.
+  """
+def get_user_id(user_obj):
+  for record in user_obj:
+    return record.id
+"""
+    Get the user's usersname based on its object.
+"""
+def get_username(user_obj):
+  for record in user_obj:
+    return record.username
+"""
+  Get the user instance based on its username.
+  To link the tasks that is created by the user. 
+"""
+def get_author(username):
+  local_session = Session() 
+  user_obj = local_session.query(User).filter_by(username=username).first()
+  return user_obj
