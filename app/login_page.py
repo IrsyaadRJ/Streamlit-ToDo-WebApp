@@ -70,7 +70,7 @@ def signup_form():
     if '' in [new_name,new_username, new_user_email, new_user_pas]:
       st.error('Some fields are missing')
     else:
-      if len(new_name) < 5 or new_name.isalpha():
+      if len(new_name) < 5 or not new_name.isalpha():
         st.error("Please Enter your valid name !!")
       if len(new_username) < 5:
         st.error('Username must be at least 5 characters long')
