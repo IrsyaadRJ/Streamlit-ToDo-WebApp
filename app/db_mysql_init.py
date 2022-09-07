@@ -65,7 +65,8 @@ class Tasktable(Base):
 
     # return string representation of the object
     def __repr__(self):
-        return f"""< Tasktable id = {self.id} name = {self.name} 
+        return f"""< Tasktable id = {self.id} user_id = {self.user_id} 
                 task = {self.task} task_status = {self.task_status} 
-                task_due_date = {self.task_due_date} datetime_created = {self.date_created}>"""
+                task_due_date = {self.task_due_date} 
+                datetime_created = {self.date_created}>"""
 
