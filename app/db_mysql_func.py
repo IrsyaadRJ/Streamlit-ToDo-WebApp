@@ -34,6 +34,7 @@ def delete_table(table,engine):
 def user_exists(username):
   local_session = Session()  # make a connection to the engine using session maker
   user_object = local_session.query(User).filter_by(username=username).first()
+  local_session.close()
   if user_object is None:
     return False
   return True
@@ -45,6 +46,7 @@ def user_exists(username):
 def email_exists(email):
   local_session = Session()  # make a connection to the engine using session maker
   email_object = local_session.query(User).filter_by(email=email).first()
+  local_session.close()
   if email_object is None:
     return False
   return True
@@ -57,6 +59,7 @@ def login(username, password):
   local_session = Session()  # make a connection to the engine using session maker
   user_object = local_session.query(User).filter_by(
     username=username, password=password).first()
+  local_session.close()
   if user_object is None:
     return False
   return True
@@ -70,6 +73,7 @@ def add_user(name,username,password,email):
                   password = password, email = email)
   local_session.add(new_user) # add the user to the session
   local_session.commit() # commit the session
+  local_session.close()
   
   """
     Get the user object based on its username.
@@ -77,15 +81,16 @@ def add_user(name,username,password,email):
 def get_userObj(username):
   local_session = Session() 
   user_obj = local_session.query(User).filter_by(username=username)
+  local_session.close()
   return user_obj
   
   """
-    Get the name of the user.
+    Get then name of the user.
   """
 def get_name(user_obj):
   for record in user_obj:
     return record.name
-
+  
   """
     Get the user's id based on its object.
   """
@@ -105,6 +110,7 @@ def get_username(user_obj):
 def get_author(username):
   local_session = Session() 
   user_obj = local_session.query(User).filter_by(username=username).first()
+  local_session.close()
   return user_obj
 
 """
