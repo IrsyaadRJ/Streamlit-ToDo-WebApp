@@ -37,7 +37,7 @@ class User(Base):
     password = Column(String(25), nullable=False)
     name = Column(String(50), nullable=False)
     email = Column(String(40), nullable = True)
-    tasks = relationship("Tasktable",backref="author")
+    tasks = relationship("Tasktable",backref="author", cascade = "all, delete",post_update=True)
     
     def __repr__(self):
         return f"< User id = {self.id} username = {self.username} name = {self.name} >"
