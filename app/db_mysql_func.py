@@ -206,4 +206,40 @@ def delete_task(user_id,task_id):
   local_session.commit()
   local_session.close()
 
+"""
+Check whether the user is admin or not.
+@return True if the user is admin, False otherwise
+"""
+def is_admin(user_obj):
+  if(get_username(user_obj) == "admin"):
+    return True
+  return False
+
+"""
+Get all tasks that have been created by all users.
+@return df dataframe contains all tasks
+"""
+def read_all_tasks(table, engine):
+  df = pd.read_sql(f'''SELECT * FROM {table.__tablename__}''', engine)
+  return df 
+
+"""
+Gel all users in the database.
+@return df dataframe all users' details.
+"""
+def read_all_users(table, engine):
+  df = pd.read_sql(f'''SELECT * FROM {table.__tablename__}''', engine)
+  return df 
+
+"""
+Delete a user based on its user_id and username.
+"""
+def delete_user(user_id,username):
+  local_session = Session()
+  curr_user = local_session.query(User).filter_by(id = user_id, username = username).first()
+  print(curr_user)
+  local_session.delete(curr_user)
+  local_session.commit()
+  local_session.close()
+
   
