@@ -6,8 +6,10 @@ from db_mysql_func import (
   email_exists,
   login,
   get_name,
-  get_userObj
+  get_userObj,
+  is_admin
 )
+from admin_app_func import(nav_to)
 
 # Set the logged in state to false, 
 # when the user clicks the logout button.
@@ -140,8 +142,17 @@ def main_login_page():
     else:
       if st.session_state['loggedIn']:
         user_obj = st.session_state['user_obj']
-        show_logout_button(login_section,logout_section)    
-        menu_func(horizontal(),user_obj)
+        #Check whether the user is an admin or not.
+        if not is_admin(user_obj):  
+          # Display the normal user interface. 
+          show_logout_button(login_section,logout_section)    
+          menu_func(horizontal(),user_obj)
+        else:
+          # URL of the admin's interface.
+          # Hosted on the other server.
+          url = "http://localhost:8082"
+           # Navigate to the admin interface.
+          nav_to(url)
       else:
         if st.session_state['signUp']:
           show_signup_page(signup_section)
