@@ -17,9 +17,9 @@ def horizontal():
   selected = option_menu(
       menu_title = None,
       # menu options,
-      options = ["Create", "Read", "Update", "Delete", "About"],
+      options = ["About","Create", "Read", "Update", "Delete"],
       # menu icons
-      icons = ["pencil-square","book","gear","trash","info-circle"],
+      icons = ["info-circle","pencil-square","book","gear","trash"],
       # change the default icon of the menu title
       menu_icon = "cast",
       default_index = 0, # index of the icon 0 for menu title
@@ -32,21 +32,21 @@ def horizontal():
   return selected
 
 #  A function that displays the menu functionality,
-#   when the user clicks one of hte menu buttons.
+#   when the user clicks one of the menu buttons.
 def menu_func(option_menu,user_obj):
   name_of_user = get_name(user_obj)
-  st.title(f"Welcome {name_of_user} !!")
+  user_id = get_user_id(user_obj)
+  # Invoked the function when the user clicks on the menu.
   if option_menu == "Create":
     option_create(user_obj)
   if option_menu == "Read":
-    user_id = get_user_id(user_obj)
     option_read(user_id)
   if option_menu == "Update":
-    st.title(f"You have selected {option_menu}")
+    option_update(user_id)
   if option_menu == "Delete":
-    st.title(f"You have selected {option_menu}")
+    option_delete(user_id)
   if option_menu == "About":
-    st.title(f"You have selected {option_menu}")
+    option_about(name_of_user)
 
 
 # if __name__ == "__main__":
