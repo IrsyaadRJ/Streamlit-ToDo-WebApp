@@ -14,6 +14,10 @@ sudo apt install -y python3-pip
 sudo python3 -m pip install streamlit
 sudo pip install jinja2 --upgrade
 sudo python3 -m pip install streamlit-option-menu
+sudo python3 -m	pip install cryptography
+sudo python3 -m pip install sqlalchemy
+sudo python3 -m pip install pymysql
+sudo python3 -m pip install plotly
 
 
 # Activate apache following mods to reseverse proxy.
@@ -30,4 +34,5 @@ a2ensite web-app1
 a2dissite 000-default
 sudo systemctl reload apache2
 
-# streamlit run /vagrant/streamlit/simple-sidebar.py --server.port=8082
+# Initialize users and tasks
+python3 /vagrant/app/init_users_tasks.py
