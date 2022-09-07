@@ -73,7 +73,7 @@ def signup_form():
       st.error('Some fields are missing')
       is_error = True
     else:
-      if len(new_name) < 5 or not new_name.isalpha():
+      if len(new_name) < 5 or not new_name.replace(" ", "").isalpha():
         st.error("Please Enter your valid name !!")
         is_error = True
       elif len(new_username) < 5:
