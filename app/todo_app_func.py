@@ -25,9 +25,12 @@ def option_create(user_obj):
     task_status = st.selectbox("Status",list_status)
     task_due_date = st.date_input("Due Date")
   if st.button("Add Task"):
-    # added to database
-    add_task(task, task_status, task_due_date,username)
-    st.success(f"Successfully Added Task: {task}")
+    if(len(task) < 1):
+      st.error("Task cannot be empty !")
+    else:
+      #Added to database.
+      add_task(task, task_status, task_due_date,username)
+      st.success(f"Successfully Added Task: {task}")
 
 def option_read(user_id):
   st.subheader("View Items")
