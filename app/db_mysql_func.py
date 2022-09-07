@@ -141,3 +141,69 @@ def add_task(task, task_status,task_due_date,username):
                        task_due_date = task_due_date, author = author)
   local_session.add(new_task) # add the task to the session
   local_session.commit() # commit the session
+  local_session.close()
+
+  """
+    Get a task based on its id and user's id (author).
+    @return a dataframe contain the task details.
+  """
+def read_a_task(user_id,task_id, table, engine):
+  df = pd.read_sql(f'''SELECT * FROM {table.__tablename__} 
+                   WHERE user_id = {user_id} and id = {task_id}''', engine)
+  return df 
+
+  """
+    Get a task object based on its id and user's id (author).
+    @return task object.
+  """
+def get_taskObj(user_id,task_id):
+  local_session = Session() 
+  task_obj = local_session.query(Tasktable).filter_by(id = task_id,user_id=user_id).first()
+  local_session.close()
+  return task_obj
+
+  """
+   Get a task from its object.
+  @return a task (string).
+  """
+def get_task(task_obj):
+  return task_obj.task
+  """
+   Get a task's status from its object.
+  @return a task'status (string).
+  """
+def get_task_status(task_obj):
+   return task_obj.task_status
+  """
+   Get a task's due date from its object.
+  @return a task (date object).
+  """
+def get_due_date(task_obj):
+  return task_obj.task_due_date
+  
+  """
+   Update a task'details based on its id and user's id (author). 
+   The following details will be updated:
+    - task (string).
+    - task_status (string).
+    - due_date (date).
+  """
+def update_task(user_id, task_id, task, task_status,task_due_date):
+  local_session = Session() 
+  curr_task = local_session.query(Tasktable).filter_by(id = task_id, user_id = user_id).first()
+  curr_task.task = task
+  curr_task.task_status = task_status
+  curr_task.task_due_date = task_due_date
+  local_session.commit() # commit the session
+  local_session.close()
+  """
+   Delete a task based on its id and user's id (author).
+  """
+def delete_task(user_id,task_id):
+  local_session = Session()
+  curr_task = local_session.query(Tasktable).filter_by(id = task_id, user_id = user_id).first()
+  local_session.delete(curr_task)
+  local_session.commit()
+  local_session.close()
+
+  
