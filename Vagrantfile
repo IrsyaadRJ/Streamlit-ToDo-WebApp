@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     # Using ubuntu/64 box
     config.vm.box = "ubuntu/focal64"
     # Insert the key manually 
-    # To avoid stuck during ssh session (Windows Error)
+    # To avoid getting stuck in ssh session (Windows Error)
     config.ssh.insert_key = false
     config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
     
@@ -35,8 +35,7 @@ Vagrant.configure("2") do |config|
         # VM's private network IP 192.168.56.13
         webserver1.vm.network "private_network", ip: "192.168.56.13"
 
-        # This following line is only necessary in the CS Labs... but that
-        # may well be where markers mark your assignment.
+        # Change the folders and files permissions to allow vagrant to access or exectute folders or files on the host machine
         webserver1.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
         # Shell commands to provision the webserver1.
@@ -54,8 +53,7 @@ Vagrant.configure("2") do |config|
         # VM's private network IP 192.168.56.14
         webserver2.vm.network "private_network", ip: "192.168.56.14"
     
-        # This following line is only necessary in the CS Labs... but that
-        # may well be where markers mark your assignment.
+        # Change the folders and files permissions to allow vagrant to access or exectute folders or files on the host machine
         webserver2.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
     
         # Shell commands to provision the webserver1.
