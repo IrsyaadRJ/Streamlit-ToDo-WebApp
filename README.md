@@ -12,6 +12,17 @@ Using Vagrant to automate the process of deploying and hosting web app with a re
 ```
 vagrant up
 ```
+- Go to http://localhost:8081 on your local browser
+- To use ToDo application login as a user.
+- To use admin's interface login as an admin.
+- User's credentials :
+  ID          Password
+  blank404    blank404
+  biggie      biggie
+- Admin credentials:
+  ID          Password
+  admin       admin
+  
 ## How does it work:
 - Each private network is given its own private network to be able to communicate with one another.
 - Using tmux to be able to run streamlit web app and admin panel on the background.
@@ -41,6 +52,7 @@ vagrant up
 - All the data is stored in remote database.
 - Using SQLAlchemy to interact with MySQL database.
 - Using PyMySQL to connect to a MySQL database server from Python.
+- Using Plotly to create graphs.
 - Hosted on different server from the Admin panel
 - Running on the backround of the VM using tmux
 
@@ -49,3 +61,4 @@ vagrant up
 - View insight of the tasks that have been created.
 - Hosted on different server from the Web App.
 - Running on the backround of the VM using tmux
+- Using Plotly to create graphs.
