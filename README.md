@@ -27,13 +27,15 @@ vagrant up
   admin       admin
 ```
 ## How does it work:
-- Each private network is given its own private network to be able to communicate with one another.
-- Using tmux to be able to run streamlit web app and admin panel on the background.
-- A local Streamlit server on a given port will automatically run once the scripts is executed.
-- Reverse proxy is needed to host the streamlit apps on the Apache Web Server on a the same port as the port forwarding configuration.
-  - Without doing reverse proxy our streamlit application can only connect with our local VM.
-- Enable our web application configuration on Apache and disable the default.
-- Port forwarding on a given port in vagrant configuration allows our local computer to be able to connect to the streamlit application.
+-	Each private network is given its private network and its IP address to be able to communicate with one another.
+-	The Vagrantfile is been configured to be able to access and execute folders or files within our machine.
+-	tmux is used to be able to run streamlit web app and admin panel in the background uninterruptedly.
+-	A local Streamlit server on a given port will automatically run once the script is executed.
+o	By default streamlit will always automatically launch a local streamlit server on a given port once a streamlit script runs.
+-	Reverse proxy in Apache is needed to host the streamlit apps on the Apache Web Server on the same port as the port forwarding configuration. (the one that we’ve configured for each VMs)
+-	Without doing reverse proxy our streamlit application can only connect with our local VM.
+-	Enable our web application configuration on Apache and disable the default.
+-	Port forwarding on a given port in vagrant configuration allows our local computer to be able to connect to the streamlit application.
 
 ## Vagrant's Configuration
 - Port forwarding to local host on a given port.
