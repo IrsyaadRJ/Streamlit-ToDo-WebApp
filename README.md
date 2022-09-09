@@ -13,15 +13,17 @@ Using Vagrant to automate the process of deploying and hosting web app with a re
 vagrant up
 ```
 - Go to http://localhost:8081 on your local browser
+- New user that is yet to be registered is able to sign up.
+- Click "signup" button to sign up to the web app.
 - To use ToDo application login as a user.
 - To use admin's interface login as an admin.
-- User's credentials :
+- User's credentials for test purpose:
 ```
   ID          Password
   blank404    blank404
   biggie      biggie
 ```
-- Admin credentials:
+- Admin credentials for test purpose:
 ```
   ID          Password
   admin       admin
